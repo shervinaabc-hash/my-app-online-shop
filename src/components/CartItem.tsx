@@ -19,20 +19,18 @@ function CartItem({ id, qty }: TcartItemProops) {
   }, []);
 
   return (
-    <div className=" grid grid-cols-9 bg-sky-100 mb-2 rounded">
-      <div className=" col-span-7 text-right p-4">
-        <h3>{data.title}</h3>
-        <p>
-          تعداد <span>{qty}</span>
-        </p>
-        <p>
-          قیمت محصول <span> {formatPrice(data.price)}</span>
-        </p>
-      <AddOrderButton id={id.toString()} />
-      </div>
+    <div className="mb-4 flex gap-4 overflow-hidden rounded-2xl border border-white/10 bg-slate-900 p-3">
+      <img className="h-28 w-36 shrink-0 rounded-xl object-cover" src={data.image} alt={data.title} />
 
-      <div className="col-span-2">
-        <img className="w-full h-full" src={data.image} alt="" />
+      <div className="flex-1">
+        <h3 className="font-bold text-white">{data.title}</h3>
+        <p className="mt-1 text-sm text-slate-400">
+          تعداد: <span className="text-white">{qty}</span>
+        </p>
+        <p className="mt-1 text-sm text-slate-400">
+          قیمت: <span className="text-amber-400">{formatPrice(data.price)}</span>
+        </p>
+        <AddOrderButton id={id.toString()} />
       </div>
     </div>
   );

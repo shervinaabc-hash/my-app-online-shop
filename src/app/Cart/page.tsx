@@ -58,44 +58,54 @@ function Cart() {
   };
 
   return (
-    <>
-      <Container>
-        <h1 className="rtl py-2">سبد خرید</h1>
-        <div className="">
-          {cartItems.map((item) => (
-            <CartItem key={item.id} {...item} />
-          ))}
-        </div>
+    <Container>
+      <h1 className="py-8 text-2xl font-bold text-white">سبد خرید</h1>
 
-        <div className="bg bg-yellow-200 text-right rtl mb-4 py-2 border 1px solid px-2 rounded">
-          <p>
-            قیمت کل:<span>{formatPrice(totalPrice)}$</span>
-          </p>
-          <p>
-            تخفیف: <span>{formatPrice(disCountPrice)}$</span>
-          </p>
-          <h3>
-            قیمت نهایی:
-            <span>{formatPrice(finalPrice)}$</span>
-          </h3>
-          <button
-            onClick={handelSubmiteDiscount}
-            className="bg-red-700 py-1 px-4 rounded cursor-pointer"
-          >
-            اعمال
-          </button>
-          <input
-            className="border py-1 ml-2 rounded"
-            placeholder="کد تخفیف را اینجا وارد کنید "
-            type="text"
-            onChange={(e) => setDiscountCod(e.target.value)}
-          />
-          {discountError && (
-            <p className="text-red-600 text-sm mt-2">{discountError}</p>
-          )}
+      {cartItems.length === 0 ? (
+        <p className="py-16 text-center text-slate-400">سبد خرید شما خالی است.</p>
+      ) : (
+        <div className="grid gap-6 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            {cartItems.map((item) => (
+              <CartItem key={item.id} {...item} />
+            ))}
+          </div>
+
+          <div className="h-fit rounded-2xl border border-white/10 bg-slate-900 p-6">
+            <div className="space-y-3 text-sm text-slate-400">
+              <p className="flex justify-between">
+                قیمت کل: <span className="text-white">{formatPrice(totalPrice)}</span>
+              </p>
+              <p className="flex justify-between">
+                تخفیف: <span className="text-white">{formatPrice(disCountPrice)}</span>
+              </p>
+              <h3 className="flex justify-between border-t border-white/10 pt-3 text-base font-bold text-white">
+                قیمت نهایی:
+                <span className="text-amber-400">{formatPrice(finalPrice || totalPrice - disCountPrice)}</span>
+              </h3>
+            </div>
+
+            <div className="mt-6 flex gap-2">
+              <input
+                className="min-w-0 flex-1 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 outline-none focus:border-amber-500"
+                placeholder="کد تخفیف"
+                type="text"
+                onChange={(e) => setDiscountCod(e.target.value)}
+              />
+              <button
+                onClick={handelSubmiteDiscount}
+                className="cursor-pointer rounded-xl bg-amber-500 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-amber-400"
+              >
+                اعمال
+              </button>
+            </div>
+            {discountError && (
+              <p className="mt-2 text-sm text-red-400">{discountError}</p>
+            )}
+          </div>
         </div>
-      </Container>
-    </>
+      )}
+    </Container>
   );
 }
 
