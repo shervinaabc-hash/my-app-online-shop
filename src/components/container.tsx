@@ -5,7 +5,7 @@ type Tcontainer={
 }
 function Container({children}:  Tcontainer) {
   return (
-    <div className="container mx-auto">{children}</div>
+    <div className="container mx-auto px-4">{children}</div>
   )
 }
 

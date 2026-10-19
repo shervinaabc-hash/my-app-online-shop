@@ -14,12 +14,12 @@ console.log(cartItems);
 
   return (
     <div>
-      <div className="py-4">
-        <button onClick={()=>handelIncreasAddToCart(parseInt(id))} className="relative overflow-hidden bg-blue-700 text-white px-4 py-2 rounded cursor-pointer transition-all duration-500 ease-out bg-gradient-to-l from-sky-300 to-sky-300 bg-[length:0%_100%] bg-right bg-no-repeat hover:bg-[length:100%_100%] active:from-blue-900 active:to-blue-900">+</button>
-        <span className=" font-bold mx-4 underline ">{getProductQtyNumber(parseInt(id))}</span>
-        <button onClick={()=>handleMinusClick(parseInt(id))} className="relative overflow-hidden bg-blue-700 text-white px-4 py-2 rounded cursor-pointer transition-all duration-500 ease-out bg-gradient-to-l from-sky-300 to-sky-300 bg-[length:0%_100%] bg-right bg-no-repeat hover:bg-[length:100%_100%] active:from-blue-900 active:to-blue-900">-</button>
+      <div className="flex items-center gap-3 py-4">
+        <button onClick={()=>handelIncreasAddToCart(parseInt(id))} className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg font-bold text-white transition hover:border-amber-500 hover:text-amber-400 active:scale-95">+</button>
+        <span className="min-w-6 text-center font-bold text-white">{getProductQtyNumber(parseInt(id))}</span>
+        <button onClick={()=>handleMinusClick(parseInt(id))} className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg font-bold text-white transition hover:border-amber-500 hover:text-amber-400 active:scale-95">-</button>
       </div>
-      <button onClick={()=>handelRemoveItem(parseInt(id))} className="bg-red-700 text-black font-bold rounded shadow-md px-6 py-2 cursor-pointer hover:active:bg-red-900 transition-colors ">
+      <button onClick={()=>handelRemoveItem(parseInt(id))} className="cursor-pointer rounded-xl border border-red-500/40 px-5 py-2 text-sm text-red-400 transition hover:bg-red-500/10">
        حذف محصول
       </button>
     </div>
