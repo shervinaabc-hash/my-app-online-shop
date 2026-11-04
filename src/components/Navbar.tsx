@@ -211,23 +211,16 @@ function Navbar() {
         <Container>
           <div className="flex min-h-16 items-center justify-between py-2">
             
-            {/* سمت راست در موبایل: منوی همبرگری */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-slate-200 md:hidden hover:border-amber-500 hover:text-amber-400"
-                aria-label="Toggle Menu"
-              >
-                {isMobileMenuOpen ? (
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                ) : (
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                )}
-              </button>
+            {/* سمت راست: لوگو (در دسکتاپ و موبایل) */}
+            <div className="flex items-center gap-3">
+              <Link href="/" className="flex items-center gap-2 whitespace-nowrap text-lg font-black text-white">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/30">
+                  ☀
+                </span>
+                <span>
+                  <span className="text-amber-400">آفتاب</span> انرژی
+                </span>
+              </Link>
             </div>
 
             {/* منوی دسکتاپ (وسط) */}
@@ -249,19 +242,9 @@ function Navbar() {
               })}
             </div>
 
-            {/* سمت چپ در موبایل: دکمه سبد خرید (و لوگو در دسکتاپ) */}
-            <div className="flex items-center gap-3">
-              {/* لوگو (فقط در دسکتاپ) */}
-              <Link href="/" className="hidden md:flex items-center gap-2 whitespace-nowrap text-lg font-black text-white">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/30">
-                  ☀
-                </span>
-                <span>
-                  <span className="text-amber-400">آفتاب</span> انرژی
-                </span>
-              </Link>
-
-              {/* سبد خرید (سمت چپ در موبایل) */}
+            {/* سمت چپ: سبد خرید و منوی همبرگری (موبایل) */}
+            <div className="flex items-center gap-2">
+              {/* دکمه سبد خرید */}
               <Link
                 href="/Cart"
                 className="relative flex items-center gap-2 whitespace-nowrap rounded-xl border border-white/10 px-3 py-2 text-sm text-slate-200 transition hover:border-amber-500 hover:text-amber-400"
@@ -271,6 +254,23 @@ function Navbar() {
                   {getproudocttotaly}
                 </span>
               </Link>
+
+              {/* منوی همبرگری (فقط موبایل) */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-slate-200 md:hidden hover:border-amber-500 hover:text-amber-400"
+                aria-label="Toggle Menu"
+              >
+                {isMobileMenuOpen ? (
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
             </div>
 
           </div>
