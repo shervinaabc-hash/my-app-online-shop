@@ -1,3 +1,139 @@
+// "use client";
+// import Link from "next/link";
+// import Container from "./container";
+// import { usePathname, useSearchParams } from "next/navigation";
+// import { Suspense, useState } from "react";
+// import { useShopingCartP } from "../context/ShopingCartItemPro";
+// import { categories } from "../utils/categories";
+
+// function CategoryBar() {
+//   const searchParams = useSearchParams();
+//   const activeCategory = searchParams.get("category") ?? "";
+
+//   const items = [{ slug: "", title: "همه محصولات" }, ...categories];
+
+//   return (
+//     <div className="border-t border-white/5 bg-slate-900/95">
+//       <Container>
+//         <div className="flex gap-2 overflow-x-auto py-2">
+//           {items.map((item) => {
+//             const isActive = activeCategory === item.slug;
+//             return (
+//               <Link
+//                 key={item.slug}
+//                 href={item.slug ? `/Store?category=${item.slug}` : "/Store"}
+//                 className={`whitespace-nowrap rounded-full px-4 py-1.5 text-sm transition ${
+//                   isActive
+//                     ? "bg-amber-500 font-semibold text-slate-950"
+//                     : "text-slate-300 hover:bg-white/10 hover:text-amber-400"
+//                 }`}
+//               >
+//                 {item.title}
+//               </Link>
+//             );
+//           })}
+//         </div>
+//       </Container>
+//     </div>
+//   );
+// }
+
+// function Navbar() {
+// const {getproudocttotaly}= useShopingCartP()
+// const pathname= usePathname()
+// const [isProductsHover, setIsProductsHover] = useState(false)
+
+//   const navLink = [
+//     {
+//       href: "/",
+
+//       title: "خانه",
+//     },
+
+//     {
+//       href: "/Store",
+
+//       title: "محصولات",
+//     },
+//      {
+//       href: "/adminPanel",
+
+//       title: "پنل ادمین",
+//     },
+//          {
+//       href: "/login",
+
+//       title: "ورود",
+//     },
+//   ];
+
+//   const isStorePage = pathname.startsWith("/Store")
+//   const showCategoryBar = isStorePage || isProductsHover
+
+//   return (
+//     <header
+//       className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/90 backdrop-blur"
+//       onMouseLeave={() => setIsProductsHover(false)}
+//     >
+//       <nav>
+//         <Container>
+//           <div className="flex min-h-16 flex-wrap items-center justify-between gap-y-1 py-2">
+//             <Link href="/" className="flex items-center gap-2 whitespace-nowrap text-lg font-black text-white">
+//               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/30">
+//                 ☀
+//               </span>
+//               <span>
+//                 <span className="text-amber-400">آفتاب</span> انرژی
+//               </span>
+//             </Link>
+
+//             <div className="order-last flex w-full items-center justify-center gap-1 sm:gap-2 md:order-none md:w-auto">
+//               {navLink.map((item) => {
+//                 const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
+//                 return (
+//                   <Link
+//                     key={item.href}
+//                     href={item.href}
+//                     onMouseEnter={() => setIsProductsHover(item.href === "/Store")}
+//                     className={`rounded-lg px-2 py-2 text-sm transition sm:px-3 ${
+//                       isActive ? "text-amber-400" : "text-slate-300 hover:text-white"
+//                     }`}
+//                   >
+//                     {item.title}
+//                   </Link>
+//                 )
+//               })}
+//             </div>
+
+//             <Link
+//               href="/Cart"
+//               className="relative flex items-center gap-2 whitespace-nowrap rounded-xl border border-white/10 px-3 py-2 text-sm text-slate-200 transition hover:border-amber-500 hover:text-amber-400"
+//             >
+//               <span>سبد خرید</span>
+//               <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500 px-1 text-xs font-bold text-slate-950">
+//                 {getproudocttotaly}
+//               </span>
+//             </Link>
+//           </div>
+//         </Container>
+//       </nav>
+
+//       {showCategoryBar && (
+//         <Suspense>
+//           <CategoryBar />
+//         </Suspense>
+//       )}
+//     </header>
+//   );
+// }
+
+// export default Navbar;
+
+
+
+////////////////////////////این قسمت با کمک هوش مسصنوعی//////////////////////////
+
+
 "use client";
 import Link from "next/link";
 import Container from "./container";
@@ -39,36 +175,32 @@ function CategoryBar() {
 }
 
 function Navbar() {
-const {getproudocttotaly}= useShopingCartP()
-const pathname= usePathname()
-const [isProductsHover, setIsProductsHover] = useState(false)
+  const { getproudocttotaly } = useShopingCartP();
+  const pathname = usePathname();
+  const [isProductsHover, setIsProductsHover] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLink = [
     {
       href: "/",
-
       title: "خانه",
     },
-
     {
       href: "/Store",
-
       title: "محصولات",
     },
-     {
+    {
       href: "/adminPanel",
-
       title: "پنل ادمین",
     },
-         {
+    {
       href: "/login",
-
       title: "ورود",
     },
   ];
 
-  const isStorePage = pathname.startsWith("/Store")
-  const showCategoryBar = isStorePage || isProductsHover
+  const isStorePage = pathname.startsWith("/Store");
+  const showCategoryBar = isStorePage || isProductsHover;
 
   return (
     <header
@@ -77,44 +209,92 @@ const [isProductsHover, setIsProductsHover] = useState(false)
     >
       <nav>
         <Container>
-          <div className="flex min-h-16 flex-wrap items-center justify-between gap-y-1 py-2">
-            <Link href="/" className="flex items-center gap-2 whitespace-nowrap text-lg font-black text-white">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/30">
-                ☀
-              </span>
-              <span>
-                <span className="text-amber-400">آفتاب</span> انرژی
-              </span>
-            </Link>
+          <div className="flex min-h-16 items-center justify-between py-2">
+            
+            {/* سمت راست در موبایل: منوی همبرگری */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-slate-200 md:hidden hover:border-amber-500 hover:text-amber-400"
+                aria-label="Toggle Menu"
+              >
+                {isMobileMenuOpen ? (
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+            </div>
 
-            <div className="order-last flex w-full items-center justify-center gap-1 sm:gap-2 md:order-none md:w-auto">
+            {/* منوی دسکتاپ (وسط) */}
+            <div className="hidden md:flex items-center gap-1 sm:gap-2">
               {navLink.map((item) => {
-                const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
+                const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     onMouseEnter={() => setIsProductsHover(item.href === "/Store")}
-                    className={`rounded-lg px-2 py-2 text-sm transition sm:px-3 ${
+                    className={`rounded-lg px-3 py-2 text-sm transition ${
                       isActive ? "text-amber-400" : "text-slate-300 hover:text-white"
                     }`}
                   >
                     {item.title}
                   </Link>
-                )
+                );
               })}
             </div>
 
-            <Link
-              href="/Cart"
-              className="relative flex items-center gap-2 whitespace-nowrap rounded-xl border border-white/10 px-3 py-2 text-sm text-slate-200 transition hover:border-amber-500 hover:text-amber-400"
-            >
-              <span>سبد خرید</span>
-              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500 px-1 text-xs font-bold text-slate-950">
-                {getproudocttotaly}
-              </span>
-            </Link>
+            {/* سمت چپ در موبایل: دکمه سبد خرید (و لوگو در دسکتاپ) */}
+            <div className="flex items-center gap-3">
+              {/* لوگو (فقط در دسکتاپ) */}
+              <Link href="/" className="hidden md:flex items-center gap-2 whitespace-nowrap text-lg font-black text-white">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/30">
+                  ☀
+                </span>
+                <span>
+                  <span className="text-amber-400">آفتاب</span> انرژی
+                </span>
+              </Link>
+
+              {/* سبد خرید (سمت چپ در موبایل) */}
+              <Link
+                href="/Cart"
+                className="relative flex items-center gap-2 whitespace-nowrap rounded-xl border border-white/10 px-3 py-2 text-sm text-slate-200 transition hover:border-amber-500 hover:text-amber-400"
+              >
+                <span>سبد خرید</span>
+                <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500 px-1 text-xs font-bold text-slate-950">
+                  {getproudocttotaly}
+                </span>
+              </Link>
+            </div>
+
           </div>
+
+          {/* منوی کشویی موبایل */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden pb-4 pt-2 border-t border-white/10 flex flex-col gap-2">
+              {navLink.map((item) => {
+                const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`rounded-lg px-4 py-2.5 text-sm transition ${
+                      isActive ? "bg-amber-500/10 text-amber-400 font-bold" : "text-slate-300 hover:bg-white/5 hover:text-white"
+                    }`}
+                  >
+                    {item.title}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </Container>
       </nav>
 
