@@ -26,23 +26,31 @@ function AdminPanel() {
         }));
     };
 
-    const handleCreateButton = () => {
-        console.log(newProduct);
+   const handleCreateButton = () => {
         axios({
             method: "post",
-            url:"http://localhost:3002/prouduct",
-            data:{
-                id: Math.floor(Math.random( )* 100).toString(),
+            url: "http://localhost:3002/prouduct",
+            data: {
+                id: Math.floor(Math.random() * 100000).toString(), // رندوم با بازه بزرگتر برای جلوگیری از تکرار
                 title: newProduct.title,
                 price: Number(newProduct.price),
                 description: newProduct.description,
                 category: newProduct.category,
                 image: newProduct.image || `/pic/solar/${newProduct.category}.svg`
-
-            
             }
-
-        })
+        }).then(() => {
+            alert("محصول با موفقیت اضافه شد!");
+            // پاکسازی فرم (اختیاری)
+            setNewProduct({
+                title: "",
+                price: "",
+                description: "",
+                image: "",
+                category: categories[0].slug,
+            });
+        }).catch(() => {
+            alert("خطا در ثبت محصول!");
+        });
     };
 
     return (
