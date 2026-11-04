@@ -17,14 +17,16 @@ const features = [
 export default function Home() {
   return (
     <>
+      {/* بخش هرو با انیمیشن‌های شناور و ظاهر شدن */}
       <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-amber-500/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-orange-600/20 blur-3xl" />
+        <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-amber-500/20 blur-3xl animate-pulse" />
+        <div className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-orange-600/20 blur-3xl animate-pulse" />
 
         <Container>
           <div className="relative grid items-center gap-10 py-16 md:grid-cols-2 md:py-24">
-            <div>
-              <span className="inline-block rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1 text-sm text-amber-400">
+            {/* بخش متن‌ها با افکت ورود */}
+            <div className="transition-all duration-700 ease-out transform translate-y-0 opacity-100">
+              <span className="inline-block rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1 text-sm text-amber-400 shadow-sm shadow-amber-500/20">
                 انرژی پاک، قبض برق کمتر
               </span>
               <h1 className="mt-6 text-4xl leading-tight font-black text-white md:text-5xl md:leading-tight">
@@ -36,16 +38,17 @@ export default function Home() {
                 آفتاب انرژی تأمین‌کننده‌ی پنل خورشیدی، اینورتر و باتری با کیفیت است و
                 نیروگاه خورشیدی شما را از طراحی تا نصب همراهی می‌کند.
               </p>
+              
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/Store"
-                  className="rounded-xl bg-amber-500 px-6 py-3 font-bold text-slate-950 shadow-lg shadow-amber-500/30 transition hover:-translate-y-0.5 hover:bg-amber-400"
+                  className="rounded-xl bg-amber-500 px-6 py-3 font-bold text-slate-950 shadow-lg shadow-amber-500/30 transition-all duration-300 hover:-translate-y-1 hover:bg-amber-400 hover:shadow-amber-500/50 active:translate-y-0"
                 >
                   مشاهده محصولات
                 </Link>
                 <a
                   href="#categories"
-                  className="rounded-xl border border-white/15 px-6 py-3 font-medium text-white transition hover:border-amber-500 hover:text-amber-400"
+                  className="rounded-xl border border-white/15 px-6 py-3 font-medium text-white transition-all duration-300 hover:-translate-y-1 hover:border-amber-500 hover:text-amber-400"
                 >
                   دسته‌بندی‌ها
                 </a>
@@ -53,7 +56,7 @@ export default function Home() {
 
               <div className="mt-10 grid max-w-md grid-cols-3 gap-4">
                 {stats.map((item) => (
-                  <div key={item.label}>
+                  <div key={item.label} className="transition duration-300 hover:scale-105">
                     <p className="text-2xl font-black text-white">{item.value}</p>
                     <p className="mt-1 text-xs text-slate-400">{item.label}</p>
                   </div>
@@ -61,11 +64,20 @@ export default function Home() {
               </div>
             </div>
 
-            <img src="/pic/solar/hero.svg" alt="خانه با پنل خورشیدی" className="w-full" />
+            {/* تصویر اصلی با انیمیشن شناور نرم (Floating Animation) */}
+            <div className="relative flex justify-center">
+              <div className="absolute inset-0 bg-amber-500/10 blur-2xl rounded-full -z-10"></div>
+              <img 
+                src="/pic/solar/hero.svg" 
+                alt="خانه با پنل خورشیدی" 
+                className="w-full max-w-lg animate-[bounce_6s_ease-in-out_infinite] hover:scale-105 transition duration-500" 
+              />
+            </div>
           </div>
         </Container>
       </section>
 
+      {/* بخش دسته‌بندی‌ها با هاور کارت‌های پیشرفته */}
       <section id="categories" className="scroll-mt-24 py-12">
         <Container>
           <h2 className="text-2xl font-bold text-white">دسته‌بندی محصولات</h2>
@@ -76,11 +88,19 @@ export default function Home() {
               <Link
                 key={item.slug}
                 href={`/Store?category=${item.slug}`}
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-slate-900 transition hover:-translate-y-1 hover:border-amber-500/50"
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500 hover:shadow-2xl hover:shadow-amber-500/20"
               >
-                <img src={item.image} alt={item.title} className="aspect-[4/3] w-full object-cover" />
+                <div className="overflow-hidden">
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                  />
+                </div>
                 <div className="p-5">
-                  <h3 className="text-lg font-bold text-white group-hover:text-amber-400">{item.title}</h3>
+                  <h3 className="text-lg font-bold text-white transition-colors duration-300 group-hover:text-amber-400">
+                    {item.title}
+                  </h3>
                   <p className="mt-1 text-sm text-slate-400">{item.description}</p>
                 </div>
               </Link>
@@ -89,12 +109,16 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="py-12">
+      {/* بخش ویژگی‌ها با هاور و انیمیشن ظریف */}
+      <section className="py-12 mb-12">
         <Container>
           <div className="grid gap-6 sm:grid-cols-3">
             {features.map((item, index) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 font-bold text-amber-400">
+              <div 
+                key={item.title} 
+                className="rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/40 hover:bg-white/[0.07] hover:shadow-xl"
+              >
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 font-bold text-amber-400 transition-transform duration-300 group-hover:rotate-6">
                   {index + 1}
                 </span>
                 <h3 className="mt-4 font-bold text-white">{item.title}</h3>
