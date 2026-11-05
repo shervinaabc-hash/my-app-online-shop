@@ -1,32 +1,32 @@
-"use client";
+// "use client";
 
-import { useShopingCartP } from "../context/ShopingCartItemPro";
+// import { useShopingCartP } from "../context/ShopingCartItemPro";
 
-type TaddToCartproops = {
-  id: string;
-};
+// type TaddToCartproops = {
+//   id: string;
+// };
 
 
 
-function AddOrderButton({ id }: TaddToCartproops) {
-  const { cartItems,handelIncreasAddToCart,getProductQtyNumber ,handleMinusClick,handelRemoveItem} = useShopingCartP();
-console.log(cartItems);
+// function AddOrderButton({ id }: TaddToCartproops) {
+//   const { cartItems,handelIncreasAddToCart,getProductQtyNumber ,handleMinusClick,handelRemoveItem} = useShopingCartP();
+// console.log(cartItems);
 
-  return (
-    <div>
-      <div className="flex items-center gap-3 py-4">
-        <button onClick={()=>handelIncreasAddToCart(parseInt(id))} className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg font-bold text-white transition hover:border-amber-500 hover:text-amber-400 active:scale-95">+</button>
-        <span className="min-w-6 text-center font-bold text-white">{getProductQtyNumber(parseInt(id))}</span>
-        <button onClick={()=>handleMinusClick(parseInt(id))} className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg font-bold text-white transition hover:border-amber-500 hover:text-amber-400 active:scale-95">-</button>
-      </div>
-      <button onClick={()=>handelRemoveItem(parseInt(id))} className="cursor-pointer rounded-xl border border-red-500/40 px-5 py-2 text-sm text-red-400 transition hover:bg-red-500/10">
-       حذف محصول
-      </button>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <div className="flex items-center gap-3 py-4">
+//         <button onClick={()=>handelIncreasAddToCart(parseInt(id))} className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg font-bold text-white transition hover:border-amber-500 hover:text-amber-400 active:scale-95">+</button>
+//         <span className="min-w-6 text-center font-bold text-white">{getProductQtyNumber(parseInt(id))}</span>
+//         <button onClick={()=>handleMinusClick(parseInt(id))} className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg font-bold text-white transition hover:border-amber-500 hover:text-amber-400 active:scale-95">-</button>
+//       </div>
+//       <button onClick={()=>handelRemoveItem(parseInt(id))} className="cursor-pointer rounded-xl border border-red-500/40 px-5 py-2 text-sm text-red-400 transition hover:bg-red-500/10">
+//        حذف محصول
+//       </button>
+//     </div>
+//   );
+// }
 
-export default AddOrderButton;
+// export default AddOrderButton;
 
 
 
@@ -97,3 +97,48 @@ export default AddOrderButton;
 // }
 
 // export default AddOrderButton;
+
+
+
+
+"use client";
+
+import { useShopingCartP } from "../context/ShopingCartItemPro";
+
+type TaddToCartproops = {
+  id: string;
+};
+
+function AddOrderButton({ id }: TaddToCartproops) {
+  const { handelIncreasAddToCart, getProductQtyNumber, handleMinusClick, handelRemoveItem } = useShopingCartP();
+  
+  const qty = getProductQtyNumber(id);
+
+  return (
+    <div>
+      <div className="flex items-center gap-3 py-4">
+        <button 
+          onClick={() => handelIncreasAddToCart(id)} 
+          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg font-bold text-white transition hover:border-amber-500 hover:text-amber-400 active:scale-95"
+        >
+          +
+        </button>
+        <span className="min-w-6 text-center font-bold text-white">{qty}</span>
+        <button 
+          onClick={() => handleMinusClick(id)} 
+          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg font-bold text-white transition hover:border-amber-500 hover:text-amber-400 active:scale-95"
+        >
+          -
+        </button>
+      </div>
+      <button 
+        onClick={() => handelRemoveItem(id)} 
+        className="cursor-pointer rounded-xl border border-red-500/40 px-5 py-2 text-sm text-red-400 transition hover:bg-red-500/10"
+      >
+        حذف محصول
+      </button>
+    </div>
+  );
+}
+
+export default AddOrderButton;
